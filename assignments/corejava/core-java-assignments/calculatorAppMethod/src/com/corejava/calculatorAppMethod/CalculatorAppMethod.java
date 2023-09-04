@@ -46,7 +46,7 @@ public class CalculatorAppMethod {
 	}
 	
 	public static float division(float number1, float number2) {
-		return number1+number2;
+		return number1/number2;
 	}
 
 }
