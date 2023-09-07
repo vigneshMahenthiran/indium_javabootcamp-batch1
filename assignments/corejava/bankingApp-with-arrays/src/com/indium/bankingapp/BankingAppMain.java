@@ -1,15 +1,19 @@
 package com.indium.bankingapp;
 
 
-import com.indium.bankingapp.service.AccountService;
+import com.indium.bankingapp.service.*;
 import com.indium.bankingapp.model.Account;
-import com.indium.bankingapp.service.AccountServiceArrImpl;
 
 import java.util.Scanner;
 
 public class BankingAppMain {
     static int noOfAccountsOpened = 1;
-    static AccountService accountService = new AccountServiceArrImpl();
+//    static AccountService accountService = new AccountServiceArrImpl();
+
+//    static AccountService accountService = new AccountServiceArrayListImpl();
+//    static AccountService accountService = new AccountServiceLinkListImpl();
+//    static AccountService accountService = new AccountServiceTreeSetImpl();
+    static AccountService accountService = new AccountServiceHashSetImpl();
     static Scanner scanner = new Scanner(System.in);
 
 
