@@ -13,7 +13,9 @@ public class BankingAppMain {
 //    static AccountService accountService = new AccountServiceArrayListImpl();
 //    static AccountService accountService = new AccountServiceLinkListImpl();
 //    static AccountService accountService = new AccountServiceTreeSetImpl();
-    static AccountService accountService = new AccountServiceHashSetImpl();
+//    static AccountService accountService = new AccountServiceHashSetImpl();
+//static AccountService accountService = new AccountServiceHashMapImpl();
+    static AccountService accountService = new AccountServiceTreeMapImpl();
     static Scanner scanner = new Scanner(System.in);
 
 
