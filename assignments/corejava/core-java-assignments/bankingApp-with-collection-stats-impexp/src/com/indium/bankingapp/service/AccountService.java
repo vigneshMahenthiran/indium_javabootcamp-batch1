@@ -9,5 +9,7 @@ public interface AccountService {
     public Account getAccount(int id);
     public void getAllAccounts();
     public void printStatistics();
+    public void importData();
+    public void exportData();
 
 }
