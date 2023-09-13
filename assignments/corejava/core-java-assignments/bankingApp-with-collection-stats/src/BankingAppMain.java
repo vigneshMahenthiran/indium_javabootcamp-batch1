@@ -18,7 +18,9 @@ public class BankingAppMain {
             System.out.println("4. Update Account");
             System.out.println("5. Delete Account");
             System.out.println("6. Print Statistics");
-            System.out.println("7. Exit");
+            System.out.println("7. Import");
+            System.out.println("8. Export");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             int choice;
             try {
@@ -75,12 +77,20 @@ public class BankingAppMain {
                     break;
                 }
                 case 7:{
-                    i = 7;
+                    accountService.importData();
+                    break;
+                }
+                case 8:{
+                    accountService.exportData();
+                    break;
+                }
+                case 9:{
+                    i = 9;
                     break;
                 }
 
             }
-        }while(i !=7);
+        }while(i !=9);
 
     }
 

@@ -1,0 +1,3 @@
+100,iphone 14, Smartphone,70000
+101,HP, Laptp, 75000
+102,Canon,Inkjet,10000
