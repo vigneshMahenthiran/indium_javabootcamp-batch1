@@ -4,12 +4,17 @@ import com.indium.bankingapp.service.AccountServiceHashMapImpl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class BankingAppMain {
     static int noOfAccountsOpened = 1;
     static Scanner getData = new Scanner(System.in);
     static AccountService accountService = new AccountServiceHashMapImpl();
     public static void main(String[] args) {
+        ExecutorService executor = Executors.newCachedThreadPool();
 
         int i =1;
         do{
@@ -79,11 +84,37 @@ public class BankingAppMain {
                     break;
                 }
                 case 7:{
-                    accountService.importData();
+                    Callable<Boolean> importThread = new Callable<Boolean>() {
+                        @Override
+                        public Boolean call() throws Exception {
+                            System.out.println(Thread.currentThread()+" is importing data");
+                            accountService.importData();
+                            return true;
+                        }
+                    };
+                    Future<Boolean> importFuture = executor.submit(importThread);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 }
                 case 8:{
-                    accountService.exportData();
+                    Callable<Boolean> exportThread = new Callable<Boolean>() {
+                        @Override
+                        public Boolean call() throws Exception {
+                            System.out.println(Thread.currentThread()+" is exporting data");
+                            accountService.exportData();
+                            return true;
+                        }
+                    };
+                    Future<Boolean> exportFuture = executor.submit(exportThread);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 }
                 case 9:{

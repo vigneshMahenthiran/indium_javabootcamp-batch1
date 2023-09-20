@@ -13,7 +13,7 @@ public class JoinThreadDemo {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
+//        t1.interrupt();
         Thread t2 = new Thread(r1);
         t2.setName("T2");
         t2.start();
