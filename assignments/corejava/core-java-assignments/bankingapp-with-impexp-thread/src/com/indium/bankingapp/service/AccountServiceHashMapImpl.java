@@ -124,7 +124,7 @@ public class AccountServiceHashMapImpl implements AccountService{
         }
     }
 
-//    old code for importing data without using any threads
+
     public synchronized void importData(){
         int counter =0;
         try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
@@ -145,6 +145,7 @@ public class AccountServiceHashMapImpl implements AccountService{
         }
     }
 
+//    implementation using runnable interface
 //    public void importData(){
 //        Runnable obj1 = new Runnable() {
 //            @Override
@@ -180,7 +181,6 @@ public class AccountServiceHashMapImpl implements AccountService{
 //        }
 //    }
 
-//    old method for export data without using seperate thread
     public void exportData(){
         int counter = 0;
         try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
@@ -203,6 +203,7 @@ public class AccountServiceHashMapImpl implements AccountService{
         }
     }
 
+//    implementation using runnable interface
 //    public void exportData(){
 //        Runnable obj1 = new Runnable() {
 //            @Override
