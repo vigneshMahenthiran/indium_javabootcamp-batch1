@@ -81,51 +81,6 @@ public class AccountServiceHashMapImpl implements AccountService{
         return;
     }
 
-//    public void printStatistics(){
-//        if (accounts.isEmpty()) {
-//            System.out.println("No accounts found.");
-//            return;
-//        }
-//
-//        double totalBalance = 0;
-//        int countAccountsAbove1Lac = 0;
-//        Map<String, Integer> accountTypeCount = new HashMap<>();
-//        Map<String, Double> accountTypeTotalBalance = new HashMap<>();
-//        for (Account account : accounts.values()) {
-//            totalBalance += account.getBalance();
-//
-//            if (account.getBalance() > 100000) {
-//                countAccountsAbove1Lac++;
-//            }
-//
-//            String accountType = account.getAccType();
-//            accountTypeCount.put(accountType, accountTypeCount.getOrDefault(accountType, 0) + 1);
-//            accountTypeTotalBalance.put(accountType, accountTypeTotalBalance.getOrDefault(accountType, 0.0) + account.getBalance());
-//
-//            }
-//        System.out.println("a] No of accounts which has balance more than 1 lac: " + countAccountsAbove1Lac);
-//
-//        System.out.println("b] Show no of account by account type:");
-//        for (Map.Entry<String, Integer> entry : accountTypeCount.entrySet()) {
-//            System.out.println(entry.getKey() + ": " + entry.getValue());
-//        }
-//
-//        System.out.println("c] Show no of accounts by account type with sorting:");
-//        accountTypeCount.entrySet().stream()
-//                .sorted(Map.Entry.comparingByValue())
-//                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
-//
-//        System.out.println("d] Show avg balance by account type:");
-//        for (Map.Entry<String, Double> entry : accountTypeTotalBalance.entrySet()) {
-//            String accountType = entry.getKey();
-//            double totalBalanceByType = entry.getValue();
-//            int countByType = accountTypeCount.get(accountType);
-//            double avgBalance = totalBalanceByType / countByType;
-//            System.out.println(accountType + ": " + avgBalance);
-//        }
-//    }
-
-
     @Override
     public void printStatistics() {
         if (accounts.isEmpty()) {
