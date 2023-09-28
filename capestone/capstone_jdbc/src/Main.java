@@ -1,12 +1,12 @@
 import com.indium.capstone.model.Associate;
 import com.indium.capstone.model.Skill;
-import com.indium.capstone.service.SkillTrackerApp;
+import com.indium.capstone.service.SkillTrackerServiceImpl;
 
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        SkillTrackerApp app = new SkillTrackerApp();
+        SkillTrackerServiceImpl app = new SkillTrackerServiceImpl();
         Scanner scanner = new Scanner(System.in);
         int skillId =1;
 

@@ -3,7 +3,7 @@ package com.indium.capstone.service;
 import com.indium.capstone.Dao.AssociateDao;
 import com.indium.capstone.Dao.AssociateDaoJdbcImpl;
 import com.indium.capstone.Dao.SkillDao;
-import com.indium.capstone.Dao.SkillDaoImpl;
+import com.indium.capstone.Dao.SkillDaoJdbcImpl;
 import com.indium.capstone.model.Associate;
 import com.indium.capstone.model.Skill;
 
@@ -12,20 +12,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SkillTrackerApp implements SkillTracker{
+public class SkillTrackerServiceImpl implements SkillTracker{
     AssociateDao associateDao;
     SkillDao skillDao;
     private List<Associate> associates = new ArrayList<>();
     private List<Skill> skills = new ArrayList<>();
 
-    public SkillTrackerApp() {
+    public SkillTrackerServiceImpl() {
 
         associateDao = new AssociateDaoJdbcImpl();
-        skillDao = new SkillDaoImpl();
+        skillDao = new SkillDaoJdbcImpl();
     }
 
     public void addAssociate(Associate associate) {
@@ -38,7 +37,6 @@ public class SkillTrackerApp implements SkillTracker{
         System.out.println(skills);
         for (Associate associate : associates) {
             int id = associate.getId();
-//            System.out.println(id);
             associate.viewDetails( skills);
             System.out.println();
         }
@@ -66,6 +64,12 @@ public class SkillTrackerApp implements SkillTracker{
 
     public void viewAssociate(int associateId){
         Associate associate = associateDao.get(associateId);
+        List<Skill> skills = skillDao.getall();
+        for(Skill skill : skills){
+            if(associate.getId()==skill.getUserId()){
+                associate.addSkill(skill);
+            }
+        }
         associate.viewDetails();
     }
 
@@ -90,6 +94,15 @@ public class SkillTrackerApp implements SkillTracker{
     }
 
     public void searchAssociateBySkills(String skillName){
+        skills = skillDao.getall();
+        associates = associateDao.getall();
+        for (Associate associate : associates) {
+            for(Skill skill : skills){
+                if(associate.getId()==skill.getUserId()){
+                    associate.addSkill(skill);
+                }
+            }
+        }
         List<Associate> associatesBySkills =  associates.stream()
                 .filter(associate -> associate.getSkills().stream()
                         .anyMatch(skill -> skill.getName().equalsIgnoreCase(skillName)))

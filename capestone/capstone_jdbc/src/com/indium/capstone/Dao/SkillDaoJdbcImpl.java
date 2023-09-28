@@ -1,6 +1,5 @@
 package com.indium.capstone.Dao;
 
-import com.indium.capstone.model.Associate;
 import com.indium.capstone.model.Skill;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
@@ -8,13 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillDaoImpl implements SkillDao{
+public class SkillDaoJdbcImpl implements SkillDao{
     Connection conn = null;
     Statement stmt = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
 
-    public SkillDaoImpl() {
+    public SkillDaoJdbcImpl() {
 
     }
 

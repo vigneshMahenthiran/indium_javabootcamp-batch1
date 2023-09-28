@@ -1,8 +1,7 @@
 package com.indium.capstone.model;
 
-import com.indium.capstone.Dao.AssociateDaoJdbcImpl;
 import com.indium.capstone.Dao.SkillDao;
-import com.indium.capstone.Dao.SkillDaoImpl;
+import com.indium.capstone.Dao.SkillDaoJdbcImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +21,7 @@ public class Associate {
     SkillDao skillDao;
 
     public Associate() {
-        skillDao = new SkillDaoImpl();
+        skillDao = new SkillDaoJdbcImpl();
     }
 
     public Associate(String name, int age, String businessUnit, String email, String location) {
@@ -99,7 +98,7 @@ public class Associate {
         System.out.println("Skills: ");
         for (Skill skill : skills) {
 //            if(skill.getId()==id){
-                System.out.println("  Skill ID: " + skill.getId() + ", Name: " + skill.getName());
+                System.out.println("  Skill ID: " + skill.getSkillId() + ", Name: " + skill.getName());
 //            }
         }
     }
