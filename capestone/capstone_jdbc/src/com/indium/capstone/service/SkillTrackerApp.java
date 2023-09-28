@@ -35,9 +35,10 @@ public class SkillTrackerApp implements SkillTracker{
     public void listAssociates() {
         associates = associateDao.getall();
         skills = skillDao.getall();
+        System.out.println(skills);
         for (Associate associate : associates) {
             int id = associate.getId();
-            System.out.println(id);
+//            System.out.println(id);
             associate.viewDetails( skills);
             System.out.println();
         }
@@ -104,6 +105,15 @@ public class SkillTrackerApp implements SkillTracker{
     }
 
     public void getTotalAssociatesWithSkillsGreaterThan(int n) {
+        skills = skillDao.getall();
+        associates = associateDao.getall();
+        for (Associate associate : associates) {
+            for(Skill skill : skills){
+                if(associate.getId()==skill.getUserId()){
+                    associate.addSkill(skill);
+                }
+            }
+        }
         int count = (int) associates.stream()
                 .filter(associate -> associate.getSkills().size() > n)
                 .count();
@@ -111,6 +121,16 @@ public class SkillTrackerApp implements SkillTracker{
     }
 
     public void getAssociateIdsWithSkillsGreaterThan(int n) {
+        skills = skillDao.getall();
+        associates = associateDao.getall();
+        for (Associate associate : associates) {
+            for(Skill skill : skills){
+                if(associate.getId()==skill.getUserId()){
+                    associate.addSkill(skill);
+                }
+            }
+        }
+
         List<Integer> associateIdsWithSkillsGreaterThan = associates.stream()
                 .filter(associate -> associate.getSkills().size() > n)
                 .map(Associate::getId)
@@ -123,6 +143,15 @@ public class SkillTrackerApp implements SkillTracker{
     }
 
     public void getTotalAssociatesWithSkills(String requiredSkills) {
+        skills = skillDao.getall();
+        associates = associateDao.getall();
+        for (Associate associate : associates) {
+            for(Skill skill : skills){
+                if(associate.getId()==skill.getUserId()){
+                    associate.addSkill(skill);
+                }
+            }
+        }
         int totalAssociatesWithSkills =  (int) associates.stream()
                 .filter(associate -> associate.getSkills().stream()
                         .anyMatch(skill -> skill.getName().equalsIgnoreCase(requiredSkills)))

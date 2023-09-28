@@ -64,12 +64,13 @@ public class SkillDaoImpl implements SkillDao{
 
             while (rs.next()) {
                 int skillId = rs.getInt("skillid");
+//                System.out.println(skillId);
                 String name = rs.getString("name");
                 String description = rs.getString("description");
                 String category = rs.getString("category");
                 int experience = rs.getInt("experience");
                 int id = rs.getInt("id");
-                skills.add(new Skill(id,name, description,category,experience,skillId));
+                skills.add(new Skill(skillId,name, description,category,experience,id));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -43,7 +43,7 @@ public class Skill {
     }
 
     public void viewDetails() {
-        System.out.println("Skill ID: " + id);
+        System.out.println("Skill ID: " + skillId);
         System.out.println("Name: " + name);
         System.out.println("Description: " + description);
         System.out.println("Category: " + category);
