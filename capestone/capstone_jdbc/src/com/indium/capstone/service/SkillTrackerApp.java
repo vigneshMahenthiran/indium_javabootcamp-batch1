@@ -7,6 +7,10 @@ import com.indium.capstone.Dao.SkillDaoImpl;
 import com.indium.capstone.model.Associate;
 import com.indium.capstone.model.Skill;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,16 +30,15 @@ public class SkillTrackerApp implements SkillTracker{
 
     public void addAssociate(Associate associate) {
         boolean createStatus = associateDao.create(associate);
-//        associates.add(associate);
     }
 
     public void listAssociates() {
         associates = associateDao.getall();
+        skills = skillDao.getall();
         for (Associate associate : associates) {
             int id = associate.getId();
             System.out.println(id);
-//            associate.viewDetails(id);
-            associate.viewDetails();
+            associate.viewDetails( skills);
             System.out.println();
         }
     }
@@ -50,46 +53,19 @@ public class SkillTrackerApp implements SkillTracker{
 
     public void addSkillToAssociate(int associateId, Skill skill) {
         boolean addSkillStatus = skillDao.create(skill);
-//        for (Associate associate : associates) {
-//            if (associate.getId() == associateId) {
-//                associate.addSkill(skill);
-//                break;
-//            }
-//        }
     }
 
     public void editSkill(int skillId, Skill updatedSkill) {
         boolean editSkillStatus = skillDao.update(updatedSkill);
-//        for (Skill skill : skills) {
-//            if (skill.getId() == skillId) {
-//                skill.setName(updatedSkill.getName());
-//                skill.setDescription(updatedSkill.getDescription());
-//                skill.setCategory(updatedSkill.getCategory());
-//                skill.setExperience(updatedSkill.getExperience());
-//                break;
-//            }
-//        }
-//        for (Associate associate : associates) {
-//            associate.editSkill(skillId, updatedSkill);
-//        }
     }
 
     public void deleteSkill(int skillId) {
         boolean deleteSkillStatus = skillDao.delete(skillId);
-//        skills.removeIf(skill -> skill.getId() == skillId);
-//        for (Associate associate : associates) {
-//            associate.deleteSkill(skillId);
-//        }
     }
 
     public void viewAssociate(int associateId){
         Associate associate = associateDao.get(associateId);
         associate.viewDetails();
-//        for (Associate associate : associates) {
-//            if (associate.getId() == associateId) {
-//                associate.viewDetails();
-//            }
-//        }
     }
 
     public void searchAssociateByName(String name){
@@ -152,6 +128,57 @@ public class SkillTrackerApp implements SkillTracker{
                         .anyMatch(skill -> skill.getName().equalsIgnoreCase(requiredSkills)))
                 .count();
         System.out.println("total associates with given skill are : "+totalAssociatesWithSkills);
+    }
+
+    public void importData(){
+        int counter =0;
+        try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
+            String line;
+            while((line = reader.readLine())!= null){
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int age = Integer.parseInt(parts[1]);
+                String businessUnit = parts[2];
+                String email = parts[3];
+                String location = parts[4];
+                Associate newAssociate = new Associate(name, age, businessUnit, email, location);
+                boolean createStatus = associateDao.create(newAssociate);
+                counter++;
+            }
+            System.out.println("imported "+counter+" records");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void exportData(){
+        int counter = 0;
+        try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
+            for(Associate associate : associates){
+                StringBuilder accountRecord = new StringBuilder();
+                accountRecord.append(associate.getId())
+                        .append(",")
+                        .append(associate.getName())
+                        .append(",")
+                        .append(associate.getAge())
+                        .append(",")
+                        .append(associate.getBusinessUnit())
+                        .append(",")
+                        .append(associate.getEmail())
+                        .append(",")
+                        .append(associate.getLocation())
+                        .append(",")
+                        .append(associate.getCreateTime())
+                        .append(",")
+                        .append(associate.getUpdateTime())
+                        .append("\n");
+                out.write(accountRecord.toString());
+                counter++;
+            }
+            System.out.println("exported "+counter+" account details");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 

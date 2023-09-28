@@ -69,24 +69,24 @@ public class Associate {
         updateTime = new Date();
     }
 
-//    public void viewDetails(int id) {
+    public void viewDetails(List<Skill> allSkills) {
 //        List<Skill> allskills;
 //        allskills = skillDao.getall();
-//        System.out.println(skills);
-//        System.out.println("Associate ID: " + id);
-//        System.out.println("Name: " + name);
-//        System.out.println("Age: " + age);
-//        System.out.println("Business Unit: " + businessUnit);
-//        System.out.println("Email: " + email);
-//        System.out.println("Location: " + location);
-//        System.out.println("Skills: ");
-//        for (Skill skill : allskills) {
-//            if(skill.getUserId()==id){
-//                System.out.println(skill.getUserId());
-//                System.out.println("  Skill ID: " + skill.getId() + ", Name: " + skill.getName());
-//            }
-//        }
-//    }
+        System.out.println(skills);
+        System.out.println("Associate ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Business Unit: " + businessUnit);
+        System.out.println("Email: " + email);
+        System.out.println("Location: " + location);
+        System.out.println("Skills: ");
+        for (Skill skill : allSkills) {
+            if(skill.getUserId()==id){
+                System.out.println(skill.getUserId());
+                System.out.println("  Skill ID: " + skill.getId() + ", Name: " + skill.getName());
+            }
+        }
+    }
 
     public void viewDetails() {
 //        skills = skillDao.getall();

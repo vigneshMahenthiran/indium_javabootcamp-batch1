@@ -3,6 +3,10 @@ package com.indium.capstone.service;
 import com.indium.capstone.model.Associate;
 import com.indium.capstone.model.Skill;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -137,5 +141,55 @@ public class SkillTrackerApp implements SkillTracker{
         System.out.println("total associates with given skill are : "+totalAssociatesWithSkills);
     }
 
+    public void importData(){
+        int counter =0;
+        try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
+            String line;
+            while((line = reader.readLine())!= null){
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int age = Integer.parseInt(parts[1]);
+                String businessUnit = parts[2];
+                String email = parts[3];
+                String location = parts[4];
+                Associate newAssociate = new Associate(name, age, businessUnit, email, location);
+                associates.add(newAssociate);
+                counter++;
+            }
+            System.out.println("imported "+counter+" records");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void exportData(){
+        int counter = 0;
+        try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
+            for(Associate associate : associates){
+                StringBuilder accountRecord = new StringBuilder();
+                accountRecord.append(associate.getId())
+                        .append(",")
+                        .append(associate.getName())
+                        .append(",")
+                        .append(associate.getAge())
+                        .append(",")
+                        .append(associate.getBusinessUnit())
+                        .append(",")
+                        .append(associate.getEmail())
+                        .append(",")
+                        .append(associate.getLocation())
+                        .append(",")
+                        .append(associate.getCreateTime())
+                        .append(",")
+                        .append(associate.getUpdateTime())
+                        .append("\n");
+                out.write(accountRecord.toString());
+                counter++;
+            }
+            System.out.println("exported "+counter+" account details");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

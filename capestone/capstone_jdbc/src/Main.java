@@ -22,6 +22,8 @@ public class Main {
             System.out.println("8. View Associate Details");
             System.out.println("9. Search associates");
             System.out.println("10.show key metrics");
+            System.out.println("11. Import data");
+            System.out.println("12. Export data");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -187,6 +189,12 @@ public class Main {
                     break;
 
                 }
+                case 11:
+                    app.importData();
+                    break;
+                case 12:
+                    app.exportData();
+                    break;
                 case 0:
                     System.out.println("Exiting Skill Tracker App.");
                     System.exit(0);
